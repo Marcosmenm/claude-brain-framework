@@ -1,0 +1,32 @@
+# Claude Brain Framework - .gitignore
+
+# Private/Local Files (NEVER commit these)
+/users/
+**/PROJECT_REGISTRY.md
+**/.env
+**/.env.*
+**/credentials.json
+**/secrets.yaml
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary Files
+*.tmp
+*.temp
+*.log
+*.cache
+
+# User-specific notes (keep private)
+NOTES.md
+TODO_PRIVATE.md
+WORKING_NOTES.md
