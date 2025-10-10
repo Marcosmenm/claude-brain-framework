@@ -196,7 +196,137 @@ Install recommended agents?"
 
 ---
 
-## Cycle 6: Generation & Validation
+## Cycle 6: Documentation Planning
+
+### What to Do
+1. **List core systems detected** from entity/model analysis
+2. **Identify architectural components** that need documentation
+3. **Present documentation plan** to user for confirmation
+4. **Get user approval** before generating files
+
+### Present Documentation Plan
+```
+"Based on my analysis, I'll create documentation for:
+
+Core Systems (Business Domain):
+📄 [System_1].md - [Brief description of what it covers]
+📄 [System_2].md - [Brief description]
+📄 [System_3].md - [Brief description]
+
+Architecture:
+📄 [Backend_Architecture].md - [Tech stack and patterns]
+📄 [Infrastructure].md - [Deployment and services] (if applicable)
+
+This documentation will capture:
+- What I've learned from code analysis
+- Business rules and workflows discovered
+- API endpoints and data models
+- Integration points
+
+Should I proceed with generating these documentation files?"
+```
+
+### Only Proceed When
+- User explicitly approves the documentation list
+- User confirms the systems/components are correctly identified
+- User adds/removes any documentation files from the list
+
+---
+
+## Cycle 7: Documentation Generation
+
+### What to Create
+1. **Actually generate documentation files** (not just empty folders)
+2. **Populate with analysis findings** from previous cycles
+3. **Include code references** to specific files analyzed
+4. **Add placeholders** for information that needs user input
+
+### For Each Core System Documentation
+**Content Structure:**
+```markdown
+# [System Name] - Documentation
+
+## Overview
+[1-2 paragraphs based on model/controller/service analysis]
+
+## User Roles
+[Inferred from permissions/guards detected]
+
+## Business Rules
+[From validation rules and service logic analysis]
+
+## Data Model
+### Entities
+- **[Entity]:** [Fields detected from model/migration]
+
+### Relationships
+[Detected from model relationships]
+
+## API Endpoints
+[From route analysis - actual endpoints detected]
+
+## Frontend Integration (if applicable)
+[Component paths and usage detected]
+
+## Related Systems
+[Dependencies found in code]
+
+## TODO: Requires Clarification
+- [Specific business logic that needs user explanation]
+- [Workflow triggers that weren't clear from code]
+```
+
+### For Architecture Documentation
+**Content Structure:**
+```markdown
+# [Component] Architecture
+
+## Overview
+[Based on directory structure and configuration analysis]
+
+## Technology Stack
+[Actual versions from package files]
+
+## Design Patterns
+[Patterns detected: service layer, repository, etc.]
+
+## Integration Points
+[External services detected from configs/environment]
+
+## Configuration
+[Environment variables found in .env.example]
+
+## Deployment
+[From Docker/CI files if present]
+
+## TODO: Requires Clarification
+- [Deployment-specific details not in code]
+- [Infrastructure details not visible in repository]
+```
+
+### Validation After Generation
+```
+"Documentation generation complete:
+
+✅ Core Systems (Business Domain):
+   - [System_1].md ([X] lines) - [Key sections]
+   - [System_2].md ([Y] lines) - [Key sections]
+
+✅ Architecture:
+   - [Component].md ([Z] lines) - [Key sections]
+
+Each file contains:
+- Analysis findings from your code
+- Actual endpoints/models/services detected
+- Code references for traceability
+- TODO sections for information I couldn't infer
+
+Please review the documentation and let me know if anything needs correction or additional detail."
+```
+
+---
+
+## Cycle 8: Final Structure Generation & Validation
 
 ### What to Create
 
@@ -229,30 +359,33 @@ Install recommended agents?"
 [Detected integration points with setup instructions]
 ```
 
-#### 2. Documentation Structure
-```
-/Documentation/
-├── Core_Systems/
-│   ├── [Major_System_1].md (based on detected entities)
-│   ├── [Major_System_2].md
-│   └── [Major_System_3].md
-└── README.md (overview with file map)
-```
-
-#### 3. PRP Structure
-```
-/PRPs/
-├── /active/ (empty, ready for use)
-├── /completed/ (empty, will fill during development)
-└── _TEMPLATE.md (customized for this stack)
-```
-
-#### 4. Agents (if approved)
+#### 2. Agent Structure (if approved)
 ```
 /.claude/agents/
 ├── [agent-1].md
 ├── [agent-2].md
 └── README.md (usage guide)
+```
+
+#### 3. Documentation Structure
+```
+/.claude/documentation/
+├── Core_Systems/
+│   ├── [Major_System_1].md (based on detected entities)
+│   ├── [Major_System_2].md
+│   └── [Major_System_3].md
+├── Architecture/
+│   ├── [Backend_Architecture].md (if applicable)
+│   └── [Infrastructure].md (if applicable)
+└── README.md (overview with file map)
+```
+
+#### 4. PRP Structure
+```
+/.claude/prps/
+├── /active/ (empty, ready for use)
+├── /completed/ (empty, will fill during development)
+└── _TEMPLATE.md (customized for this stack)
 ```
 
 #### 5. Chat Summaries (if requested)
@@ -268,10 +401,11 @@ Install recommended agents?"
 ✅ CLAUDE.md ([X] lines)
   - [Key sections with brief descriptions]
 
-✅ Documentation/ 
-  - [Number] core system docs generated
+✅ .claude/documentation/
+  - [Number] core system docs generated with actual content
+  - [Number] architecture docs with analysis findings
 
-✅ PRPs/
+✅ .claude/prps/
   - Template customized for [stack]
 
 ✅ .claude/agents/ (if applicable)
@@ -403,13 +537,17 @@ Claude: "Got it. Based on your Laravel + React + Stripe stack,
 User: "Yes"
 
 Claude: "Initialization complete!
-        
+
         Created:
         ✅ CLAUDE.md (312 lines)
-        ✅ Documentation for 3 core systems
-        ✅ PRP template (Laravel/React optimized)
-        ✅ 3 configured agents
-        
+        ✅ .claude/documentation/
+           - Product_Catalog.md (187 lines)
+           - Order_Processing.md (234 lines)
+           - Customer_Accounts.md (156 lines)
+           - Backend_Architecture.md (198 lines)
+        ✅ .claude/prps/ template (Laravel/React optimized)
+        ✅ .claude/agents/ - 3 configured agents
+
         You're ready to develop naturally. Just describe what
         you need and I'll handle the methodology automatically."
 ```

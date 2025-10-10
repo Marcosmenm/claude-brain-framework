@@ -37,10 +37,19 @@ Claude analyzes your code structure, identifies patterns (API architecture, serv
 **Cycle 3: Business Domain**
 Claude examines models, controllers, and services to understand your business logic. Questions focus on business rules that can't be inferred from code.
 
-**Cycle 4: Agent Recommendations**
+**Cycle 4: Integration & Optimization**
+Claude identifies MCP integration opportunities and areas for improvement.
+
+**Cycle 5: Agent Recommendations**
 Based on your tech stack, Claude suggests relevant specialized agents.
 
-**Cycle 5: Completion**
+**Cycle 6: Documentation Planning**
+Claude presents a list of documentation files to generate based on your codebase.
+
+**Cycle 7: Documentation Generation**
+Claude creates actual documentation files populated with analysis findings.
+
+**Cycle 8: Completion**
 Claude generates your complete context engineering structure.
 
 ### Step 5: Start Developing
@@ -87,10 +96,10 @@ Claude automatically:
 Your project now has:
 
 - **CLAUDE.md** - Project brain (auto-generated from your code)
-- **Documentation/** - System docs based on actual code
-- **PRPs/** - Feature tracking (active/completed)
-- **Agents/** - Specialized Claude instances (optional)
-- **Chat Summaries/** - Conversation tracking (optional)
+- **.claude/documentation/** - System docs populated with actual analysis
+- **.claude/prps/** - Feature tracking (active/completed)
+- **.claude/agents/** - Specialized Claude instances (optional)
+- **.claude/chat-summaries/** - Conversation tracking (optional)
 
 ---
 

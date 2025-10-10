@@ -125,9 +125,11 @@
 /
 ├── [source directory]/
 │   └── [organization pattern]
-├── /Documentation/          # System docs (ALWAYS check first)
-├── /PRPs/                   # Implementation blueprints
-├── /.claude/                # Claude configuration
+├── /.claude/                # Claude context engineering
+│   ├── /documentation/      # System docs (ALWAYS check first)
+│   ├── /prps/              # Implementation blueprints
+│   ├── /agents/            # Specialized agents
+│   └── /chat-summaries/    # Conversation tracking (optional)
 ├── /tests/ or /spec/        # Testing
 └── [config files]           # Configuration
 ```
@@ -194,15 +196,15 @@
 ## 📚 DOCUMENTATION
 
 ### System Documentation
-**Location:** `/Documentation/`
+**Location:** `/.claude/documentation/`
 
 **Structure:**
-- `@Documentation/Core_Systems/[System_1].md`
-- `@Documentation/Core_Systems/[System_2].md`
-- `@Documentation/Workflows/[Workflow].md`
-- `@Documentation/Architecture/[Component].md`
+- `@.claude/documentation/Core_Systems/[System_1].md`
+- `@.claude/documentation/Core_Systems/[System_2].md`
+- `@.claude/documentation/Workflows/[Workflow].md` (if applicable)
+- `@.claude/documentation/Architecture/[Component].md`
 
-**CLAUDE: Always check relevant docs before implementation.**
+**CLAUDE: Always check relevant docs before implementation using @import syntax.**
 
 ### External References
 - **[Framework/Tool]:** [Documentation URL]
