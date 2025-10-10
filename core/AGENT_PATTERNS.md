@@ -167,6 +167,173 @@ operates independently, and can be composed for complex workflows.
 - Query performance
 - Relationship design
 
+#### **database-query-optimizer**
+**Purpose:** Comprehensive database query analysis and optimization
+**When to use:** Performance issues, production prep, periodic audits
+**Tools:** Read, Grep, Bash
+**Focuses on:**
+- Analyzing all database queries in codebase
+- Identifying N+1 query patterns
+- Detecting missing indexes
+- Finding inefficient joins and subqueries
+- Table size impact analysis
+- Query execution plan optimization
+
+**Community source:** Custom agent (inspired by common CTO performance requests)
+
+**How it works:**
+1. **Schema Analysis:** Reads database schema from migrations/models
+2. **Query Detection:** Greps entire codebase for all database queries
+3. **Pattern Analysis:** Identifies anti-patterns (N+1, full table scans, etc.)
+4. **Size Context:** Guides user to safely extract table size metrics
+5. **Impact Assessment:** Calculates query cost based on actual data volume
+6. **Recommendations:** Provides actionable optimization suggestions
+
+**Safe Table Size Collection:**
+```sql
+-- Agent guides user to run (no customer data exposed):
+
+-- MySQL/MariaDB:
+SELECT
+  table_name,
+  table_rows,
+  ROUND(data_length/1024/1024, 2) AS data_mb,
+  ROUND(index_length/1024/1024, 2) AS index_mb
+FROM information_schema.TABLES
+WHERE table_schema = 'your_database'
+ORDER BY data_length DESC;
+
+-- PostgreSQL:
+SELECT
+  schemaname,
+  tablename,
+  pg_total_relation_size(schemaname||'.'||tablename) AS size_bytes,
+  pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) AS size
+FROM pg_tables
+WHERE schemaname = 'public'
+ORDER BY size_bytes DESC;
+
+-- User pastes just the metrics (table names + sizes, no real data)
+```
+
+**Output Example:**
+```
+🔍 Database Query Optimization Report
+
+═══ CRITICAL ISSUES ═══
+
+1. N+1 Query Pattern in UserController.getProfiles()
+   📍 File: backend/controllers/UserController.ts:45
+   📊 Impact: HIGH
+
+   Current Behavior:
+   - 1 query to fetch users
+   - N queries to fetch each user's profile (N = ~50 users avg)
+   - Table 'users': 500,000 rows
+   - Est. queries per request: 51
+
+   Optimization:
+   ```sql
+   -- Current (N+1):
+   SELECT * FROM users WHERE team_id = ?
+   -- Then for each user:
+   SELECT * FROM profiles WHERE user_id = ?
+
+   -- Optimized (1 query):
+   SELECT u.*, p.*
+   FROM users u
+   LEFT JOIN profiles p ON u.id = p.user_id
+   WHERE u.team_id = ?
+   ```
+
+   Impact: 98% query reduction (51 → 1 query)
+
+2. Missing Index on orders.customer_id
+   📍 Used in: OrderService.ts, ReportController.ts (5 locations)
+   📊 Impact: CRITICAL
+
+   Current State:
+   - Table 'orders': 2,000,000 rows
+   - Query: SELECT * FROM orders WHERE customer_id = ?
+   - Execution: Full table scan (~2000ms)
+
+   Fix:
+   ```sql
+   CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+   ```
+
+   Impact: Query time 2000ms → 5ms (99.75% improvement)
+
+3. Inefficient Join in DashboardController.getStats()
+   📍 File: backend/controllers/DashboardController.ts:120
+   📊 Impact: MEDIUM
+
+   Current Query:
+   ```sql
+   SELECT *
+   FROM analytics a
+   JOIN users u ON a.user_id = u.id
+   JOIN teams t ON u.team_id = t.id
+   WHERE t.account_id = ?
+   ```
+
+   Issue: SELECT * pulls unnecessary columns, teams table has 50+ fields
+
+   Optimized:
+   ```sql
+   SELECT a.*, u.name, u.email, t.name as team_name
+   FROM analytics a
+   JOIN users u ON a.user_id = u.id
+   JOIN teams t ON u.team_id = t.id
+   WHERE t.account_id = ?
+   ```
+
+   Impact: 60% data transfer reduction
+
+═══ RECOMMENDATIONS ═══
+
+Indexes to Add (3):
+1. CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+2. CREATE INDEX idx_analytics_created_at ON analytics(created_at);
+3. CREATE INDEX idx_users_team_status ON users(team_id, status);
+
+N+1 Patterns to Refactor (5 locations):
+- UserController.getProfiles() → Use eager loading
+- TeamController.getMembers() → JOIN instead of loop
+- ReportService.generateMonthly() → Batch queries
+[+ 2 more...]
+
+Query Optimizations (2):
+- DashboardController.getStats() → Select specific columns
+- AnalyticsService.aggregate() → Use database aggregation
+
+═══ ESTIMATED IMPACT ═══
+
+- Database load: ↓ 85%
+- Average response time: ↓ 70%
+- Peak load capacity: ↑ 400%
+- Cost savings: ~$800/month (less DB resources needed)
+
+═══ IMPLEMENTATION PRIORITY ═══
+
+1. HIGH: Add missing indexes (immediate 99% improvement on affected queries)
+2. HIGH: Fix N+1 in UserController (affects 40% of API calls)
+3. MEDIUM: Optimize dashboard queries (affects reporting performance)
+4. LOW: Column selection optimizations (incremental improvements)
+```
+
+**Usage:**
+```
+"Use database-query-optimizer to analyze our application performance"
+
+Agent will:
+1. Scan all code for database queries
+2. Request table size metrics from you
+3. Generate comprehensive optimization report
+4. Provide implementation-ready SQL
+5. Estimate performance improvements
+```
+
 ---
 
 ## 🎯 Tech Stack Agent Recommendations
