@@ -42,6 +42,102 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Actual Documentation**: Users now get populated documentation, not just empty folders
 - **User Control**: Documentation planning cycle gives users visibility and control over what's generated
 
+---
+
+## 🔄 Migration Guide: v1.0.0 → v1.0.1
+
+### For NEW Installations
+Simply follow the [Quick Start Guide](QUICK_START.md). The new 8-cycle process will:
+- Create `.claude/` folder structure automatically
+- Generate populated documentation files during Cycle 7
+- Set up everything correctly from the start
+
+### For EXISTING v1.0.0 Installations
+
+**You need to take action if you installed v1.0.0 and have:**
+- Empty `Documentation/` folders at project root
+- Empty `PRPs/` folders at project root
+- No actual documentation files generated
+
+#### Step 1: Reorganize File Structure
+
+**Move folders into `.claude/` directory:**
+
+```bash
+# In your project root
+mkdir -p .claude
+mv Documentation .claude/documentation
+mv PRPs .claude/prps
+
+# If you have agents folder
+mv .claude/agents .claude/agents  # Already in right place
+
+# Update .gitignore if needed
+echo ".claude/chat-summaries/" >> .gitignore
+```
+
+#### Step 2: Generate Missing Documentation
+
+**Ask Claude to run the missing Cycle 7:**
+
+```
+I upgraded claude-brain-framework from v1.0.0 to v1.0.1.
+I need you to generate the documentation that was missing in v1.0.0.
+
+Please:
+1. Analyze my codebase to identify core systems
+2. Present a documentation plan for my approval
+3. Generate populated documentation files in .claude/documentation/
+
+This is the missing Cycle 7 from the new initialization process.
+```
+
+Claude will:
+- Analyze your models, controllers, services, and architecture
+- Propose documentation files (Core_Systems, Architecture, etc.)
+- Generate actual populated documentation with code analysis
+- Create files in `.claude/documentation/` with real content
+
+#### Step 3: Update CLAUDE.md References
+
+**Update path references in your CLAUDE.md:**
+
+```markdown
+# Old paths:
+@Documentation/Core_Systems/[System].md
+/PRPs/active/
+
+# New paths:
+@.claude/documentation/Core_Systems/[System].md
+/.claude/prps/active/
+```
+
+#### Step 4: Verify Everything Works
+
+```bash
+# Check new structure
+ls -la .claude/
+ls -la .claude/documentation/
+ls -la .claude/prps/
+
+# Verify documentation has content (not empty)
+wc -l .claude/documentation/Core_Systems/*.md
+```
+
+---
+
+### What Changed & Why
+
+**v1.0.0 Problem:**
+- Created `Documentation/` and `PRPs/` at project root → Cluttered project structure
+- Only created empty folders → No actual documentation generated
+
+**v1.0.1 Solution:**
+- All Claude files in `.claude/` namespace → Clean project organization
+- Cycle 6 & 7 actually generate content → Real documentation from code analysis
+
+---
+
 ## [1.0.0] - 2025-10-10
 
 ### Added
