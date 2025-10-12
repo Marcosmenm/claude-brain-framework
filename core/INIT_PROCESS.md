@@ -235,11 +235,43 @@ Should I proceed with generating these documentation files?"
 
 ## Cycle 7: Documentation Generation
 
+### Incremental Documentation Strategy
+
+**For Large Codebases (15+ domains, 50+ services, multi-repository systems):**
+
+Use **incremental documentation** to prevent token exhaustion and maintain quality:
+
+1. **Create exhaustive analysis file first:**
+   - Save complete codebase analysis to `.claude/documentation_generation_analysis.md`
+   - Include all findings: domains, services, controllers, repositories, patterns
+   - This becomes the blueprint for all documentation generation
+
+2. **Generate DOCUMENTATION_INDEX.md:**
+   - List all planned documentation files (Core_Systems, Architecture, Workflows)
+   - Mark status: ✅ completed, 📝 TODO
+   - Include brief description of each planned doc
+   - Prioritize: High/Medium/Low priority sections
+
+3. **Generate high-priority documentation first (5-10 files):**
+   - Focus on most critical systems (Authentication, Core Business Logic, Architecture)
+   - Generate fully populated documentation with code references
+   - Leave remaining as TODO in index
+
+4. **User can request additional docs incrementally:**
+   - "Generate Product_Catalog.md next"
+   - "Generate remaining Core_Systems documentation"
+   - Reference analysis file for consistency
+
+**For Small-Medium Codebases (<15 domains, single repository):**
+
+Generate all documentation in one pass:
+
 ### What to Create
 1. **Actually generate documentation files** (not just empty folders)
 2. **Populate with analysis findings** from previous cycles
 3. **Include code references** to specific files analyzed
 4. **Add placeholders** for information that needs user input
+5. **Create DOCUMENTATION_INDEX.md** as navigation hub
 
 ### For Each Core System Documentation
 **Content Structure:**
