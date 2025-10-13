@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Multi-Repository System Template**: New `CLAUDE_MD_MULTI_REPO_SYSTEM.md` template for backend + frontend(s) architectures
+  - Specialized template for systems with multiple interconnected repositories
+  - Includes API versioning strategy documentation
+  - Cross-repository coordination and deployment guidance
+  - Supports backend + web + mobile configurations
+
+- **Documentation Index Template**: New `DOCUMENTATION_INDEX_TEMPLATE.md` for documentation catalog management
+  - Status tracking with ✅ completed and 📝 TODO indicators
+  - Priority system (High/Medium/Low) for documentation planning
+  - Documentation maintenance guidelines
+  - Usage instructions for different developer roles
+
+- **Incremental Documentation Strategy**: Enhanced `core/INIT_PROCESS.md` Cycle 7
+  - Strategy for large codebases (15+ domains, multi-repository systems)
+  - Create analysis file first, then generate high-priority docs incrementally
+  - Prevents token exhaustion and maintains documentation quality
+  - Allows users to request additional docs as needed
+  - Small-medium codebases still generate all docs in one pass
+
+### Why This Matters
+- **Multi-Repo Support**: Many modern systems use separate repos for backend/frontend - now properly supported
+- **Scalable Documentation**: Large codebases can now be documented incrementally without quality loss
+- **Better Navigation**: Documentation index provides central hub for all project knowledge
+- **Real-World Testing**: Enhancements based on documenting enterprise CRM with 15 domains, 80+ repos, 3 frontends
+
 ### Planned Features
 - Migration guides for version updates
 - Additional language-specific templates
