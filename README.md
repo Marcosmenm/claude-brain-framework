@@ -143,7 +143,7 @@ When the framework improves, Claude can update your projects while preserving cu
 - [CHAT_SUMMARY_TEMPLATE.md](templates/CHAT_SUMMARY_TEMPLATE.md) - Conversation summaries
 
 ### Examples
-- [anonymous-saas-platform/](examples/anonymous-saas-platform/) - Single-project SaaS example
+- [saas-platform/](examples/saas-platform/) - Single-project SaaS example
 - [multi-repo-ecommerce/](examples/multi-repo-ecommerce/) - Multi-repository system example (NEW in v1.1.0)
 
 ## Philosophy
