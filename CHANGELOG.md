@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned Features
-- Multi-repository example projects
 - Language-specific multi-repo templates (Java+React, Python+Vue, etc.)
 - Documentation dependency graphs
 - Enhanced MCP integration patterns
@@ -35,6 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Prevents token exhaustion and maintains documentation quality
   - Allows users to request additional docs as needed
   - Small-medium codebases still generate all docs in one pass
+
+- **Multi-Repository E-Commerce Example**: New `examples/multi-repo-ecommerce/`
+  - Demonstrates multi-repo template usage with backend + web + mobile architecture
+  - Shows DOCUMENTATION_INDEX.md in practice
+  - Provides copy-paste ready example for real projects
+  - Illustrates incremental documentation strategy
 
 ### Why This Matters
 - **Multi-Repo Support**: Many modern systems use separate repos for backend/frontend - now properly supported
