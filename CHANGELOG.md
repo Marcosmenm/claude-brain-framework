@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Planned Features
+- Multi-repository example projects
+- Language-specific multi-repo templates (Java+React, Python+Vue, etc.)
+- Documentation dependency graphs
+- Enhanced MCP integration patterns
+- Community agent contributions
+
+## [1.1.0] - 2025-10-13
+
 ### Added
 - **Multi-Repository System Template**: New `CLAUDE_MD_MULTI_REPO_SYSTEM.md` template for backend + frontend(s) architectures
   - Specialized template for systems with multiple interconnected repositories
@@ -32,12 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Scalable Documentation**: Large codebases can now be documented incrementally without quality loss
 - **Better Navigation**: Documentation index provides central hub for all project knowledge
 - **Real-World Testing**: Enhancements based on documenting enterprise CRM with 15 domains, 80+ repos, 3 frontends
-
-### Planned Features
-- Migration guides for version updates
-- Additional language-specific templates
-- Enhanced MCP integration patterns
-- Community agent contributions
 
 ## [1.0.1] - 2025-10-10
 
@@ -241,6 +244,7 @@ For breaking changes (major versions), Claude will:
 
 ---
 
-[Unreleased]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/Marcosmenm/claude-brain-framework/releases/tag/v1.0.0

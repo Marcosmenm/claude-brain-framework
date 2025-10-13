@@ -135,14 +135,16 @@ When the framework improves, Claude can update your projects while preserving cu
 - [AGENT_PATTERNS.md](core/AGENT_PATTERNS.md) - Agent recommendations and usage
 
 ### Templates
-- [CLAUDE_MD_SINGLE_PROJECT.md](templates/CLAUDE_MD_SINGLE_PROJECT.md) - Single-component projects
-- [CLAUDE_MD_MULTI_COMPONENT.md](templates/CLAUDE_MD_MULTI_COMPONENT.md) - Frontend + Backend
+- [CLAUDE_MD_UNIVERSAL.md](templates/CLAUDE_MD_UNIVERSAL.md) - Universal single-project template
+- [CLAUDE_MD_MULTI_REPO_SYSTEM.md](templates/CLAUDE_MD_MULTI_REPO_SYSTEM.md) - Multi-repository systems (Backend + Web + Mobile)
+- [DOCUMENTATION_INDEX_TEMPLATE.md](templates/DOCUMENTATION_INDEX_TEMPLATE.md) - Documentation catalog and navigation
 - [PRP_TEMPLATE.md](templates/PRP_TEMPLATE.md) - Feature implementation blueprints
 - [DOCUMENTATION_TEMPLATE.md](templates/DOCUMENTATION_TEMPLATE.md) - System documentation
 - [CHAT_SUMMARY_TEMPLATE.md](templates/CHAT_SUMMARY_TEMPLATE.md) - Conversation summaries
 
 ### Examples
-- [anonymous-saas-platform/](examples/anonymous-saas-platform/) - Complete example showing all features
+- [anonymous-saas-platform/](examples/anonymous-saas-platform/) - Single-project SaaS example
+- [multi-repo-ecommerce/](examples/multi-repo-ecommerce/) - Multi-repository system example (NEW in v1.1.0)
 
 ## Philosophy
 
