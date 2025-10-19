@@ -6,6 +6,23 @@
 
 **CLAUDE: When you detect this framework in a project, automatically apply these behavioral rules.**
 
+## 🚨 MANDATORY FIRST: Version Detection
+
+**BEFORE doing ANYTHING framework-related:**
+
+```
+User: "Apply claude-brain-framework" / "Update framework" / "Initialize context"
+    ↓
+Claude MUST:
+1. Check if CLAUDE.md exists
+2. If exists → Read version from footer → Apply missing updates (UPDATE_PROCESS.md)
+3. If not exists → Run full initialization (INIT_PROCESS.md)
+4. NEVER re-initialize existing projects
+5. NEVER create duplicate files (_Enhanced, _v2, etc.)
+```
+
+**See:** [VERSION_DETECTION.md](VERSION_DETECTION.md) for complete protocol.
+
 ## 🎯 Core Behaviors
 
 ### 1. Natural Development Workflow

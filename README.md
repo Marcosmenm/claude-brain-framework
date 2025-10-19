@@ -128,15 +128,20 @@ When the framework improves, Claude can update your projects while preserving cu
 ## Framework Components
 
 ### Core Methodology
+- [VERSION_DETECTION.md](core/VERSION_DETECTION.md) - **MANDATORY:** Check existing setup before any action
 - [METHODOLOGY.md](core/METHODOLOGY.md) - Context engineering principles
 - [BEHAVIORAL_RULES.md](core/BEHAVIORAL_RULES.md) - How Claude should behave
-- [INIT_PROCESS.md](core/INIT_PROCESS.md) - Multi-cycle project initialization
-- [UPDATE_PROCESS.md](core/UPDATE_PROCESS.md) - Framework evolution management
+- [INIT_PROCESS.md](core/INIT_PROCESS.md) - Multi-cycle project initialization (new projects only)
+- [UPDATE_PROCESS.md](core/UPDATE_PROCESS.md) - Framework updates (existing projects)
 - [AGENT_PATTERNS.md](core/AGENT_PATTERNS.md) - Agent recommendations and usage
+- [HIERARCHICAL_CONTEXT_SYNC.md](core/HIERARCHICAL_CONTEXT_SYNC.md) - Multi-team repository management
+- [PROJECT_STRUCTURE_STANDARDS.md](core/PROJECT_STRUCTURE_STANDARDS.md) - Directory structure and migration
 
 ### Templates
 - [CLAUDE_MD_UNIVERSAL.md](templates/CLAUDE_MD_UNIVERSAL.md) - Universal single-project template
 - [CLAUDE_MD_MULTI_REPO_SYSTEM.md](templates/CLAUDE_MD_MULTI_REPO_SYSTEM.md) - Multi-repository systems (Backend + Web + Mobile)
+- [CLAUDE_MD_ROOT_ORCHESTRATION.md](templates/CLAUDE_MD_ROOT_ORCHESTRATION.md) - Multi-team root context (NEW v1.1.0)
+- [CLAUDE_MD_TEAM_LEVEL.md](templates/CLAUDE_MD_TEAM_LEVEL.md) - Individual team context (NEW v1.1.0)
 - [DOCUMENTATION_INDEX_TEMPLATE.md](templates/DOCUMENTATION_INDEX_TEMPLATE.md) - Documentation catalog and navigation
 - [PRP_TEMPLATE.md](templates/PRP_TEMPLATE.md) - Feature implementation blueprints
 - [DOCUMENTATION_TEMPLATE.md](templates/DOCUMENTATION_TEMPLATE.md) - System documentation
@@ -144,7 +149,8 @@ When the framework improves, Claude can update your projects while preserving cu
 
 ### Examples
 - [saas-platform/](examples/saas-platform/) - Single-project SaaS example
-- [multi-repo-ecommerce/](examples/multi-repo-ecommerce/) - Multi-repository system example (NEW in v1.1.0)
+- [multi-repo-ecommerce/](examples/multi-repo-ecommerce/) - Multi-repository system example
+- [multi-team-company/](examples/multi-team-company/) - Multi-team hierarchical structure (NEW v1.1.0)
 
 ## Philosophy
 

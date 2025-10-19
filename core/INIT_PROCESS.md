@@ -1,6 +1,16 @@
 # Project Initialization Process
 
-**CLAUDE: This file contains instructions for initializing context engineering in new projects.**
+**CLAUDE: This file contains instructions for initializing context engineering in NEW projects.**
+
+## 🚨 PREREQUISITE: Version Detection
+
+**BEFORE using this process:**
+
+1. **Check if project already has framework** (see [VERSION_DETECTION.md](VERSION_DETECTION.md))
+2. **If CLAUDE.md exists** → Use UPDATE_PROCESS.md instead (DO NOT re-initialize!)
+3. **If CLAUDE.md missing** → Project is new, proceed with this initialization
+
+**This process is ONLY for projects without existing context engineering.**
 
 ## 🎯 When to Use This Process
 
@@ -8,6 +18,8 @@ When a user says:
 - "Help me apply this framework to my project at [path]"
 - "Initialize context engineering for my project"
 - "Set up Claude Brain Framework for [project]"
+
+**AND the project has NO CLAUDE.md file.**
 
 ## 🚀 Multi-Cycle Initialization Interview
 
