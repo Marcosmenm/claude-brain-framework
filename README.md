@@ -92,22 +92,32 @@ Not just "prompt engineering" - systematic management of what Claude knows, when
 
 **Learn more:** [core/METHODOLOGY.md](core/METHODOLOGY.md)
 
-### 2. Multi-Cycle Initialization
+### 2. Lean Incremental Development
+Research → Plan → Build → Test → Iterate workflow that maximizes success and minimizes debugging complexity.
+
+**Learn more:** [core/LEAN_DEVELOPMENT_WORKFLOW.md](core/LEAN_DEVELOPMENT_WORKFLOW.md)
+
+### 3. Multi-Cycle Initialization
 Instead of filling out forms, Claude interviews you intelligently, analyzing your code and asking targeted questions to build complete context.
 
 **Learn more:** [core/INIT_PROCESS.md](core/INIT_PROCESS.md)
 
-### 3. Agent Integration
+### 4. Agent Integration
 Specialized Claude instances for code review, testing, documentation, and more - automatically suggested based on your tech stack.
 
 **Learn more:** [core/AGENT_PATTERNS.md](core/AGENT_PATTERNS.md)
 
-### 4. PRP Methodology
+### 5. PRP Methodology
 Product Requirements Prompts create structured blueprints for features, tracking changes and decisions throughout development.
 
 **Learn more:** [templates/PRP_TEMPLATE.md](templates/PRP_TEMPLATE.md)
 
-### 5. Update Propagation
+### 6. CI/CD Best Practices
+Lean deployment methodology with framework-specific examples and common error solutions.
+
+**Learn more:** [core/CICD_DEPLOYMENT_GUIDE.md](core/CICD_DEPLOYMENT_GUIDE.md)
+
+### 7. Update Propagation
 When the framework improves, Claude can update your projects while preserving customizations.
 
 **Learn more:** [core/UPDATE_PROCESS.md](core/UPDATE_PROCESS.md)
@@ -130,10 +140,12 @@ When the framework improves, Claude can update your projects while preserving cu
 ### Core Methodology
 - [VERSION_DETECTION.md](core/VERSION_DETECTION.md) - **MANDATORY:** Check existing setup before any action
 - [METHODOLOGY.md](core/METHODOLOGY.md) - Context engineering principles
+- [LEAN_DEVELOPMENT_WORKFLOW.md](core/LEAN_DEVELOPMENT_WORKFLOW.md) - **NEW v1.2.0:** Incremental development methodology
 - [BEHAVIORAL_RULES.md](core/BEHAVIORAL_RULES.md) - How Claude should behave
 - [INIT_PROCESS.md](core/INIT_PROCESS.md) - Multi-cycle project initialization (new projects only)
 - [UPDATE_PROCESS.md](core/UPDATE_PROCESS.md) - Framework updates (existing projects)
 - [AGENT_PATTERNS.md](core/AGENT_PATTERNS.md) - Agent recommendations and usage
+- [CICD_DEPLOYMENT_GUIDE.md](core/CICD_DEPLOYMENT_GUIDE.md) - **NEW v1.2.0:** CI/CD deployment best practices
 - [HIERARCHICAL_CONTEXT_SYNC.md](core/HIERARCHICAL_CONTEXT_SYNC.md) - Multi-team repository management
 - [PROJECT_STRUCTURE_STANDARDS.md](core/PROJECT_STRUCTURE_STANDARDS.md) - Directory structure and migration
 
@@ -151,6 +163,7 @@ When the framework improves, Claude can update your projects while preserving cu
 - [saas-platform/](examples/saas-platform/) - Single-project SaaS example
 - [multi-repo-ecommerce/](examples/multi-repo-ecommerce/) - Multi-repository system example
 - [multi-team-company/](examples/multi-team-company/) - Multi-team hierarchical structure (NEW v1.1.0)
+- [cicd/](examples/cicd/) - **NEW v1.2.0:** CI/CD workflows and deployment troubleshooting
 
 ## Philosophy
 

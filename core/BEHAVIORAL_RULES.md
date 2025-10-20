@@ -95,7 +95,68 @@ How does authentication work?"
 - Configuration updates
 - Documentation updates
 
-### 5. Intelligent Defaults
+### 5. Incremental Development Protocol
+
+**CLAUDE: Apply lean incremental methodology for complex features.**
+
+**Automatically propose phased implementation when:**
+- Feature affects **>3 files**
+- Implementation **>200 lines of code**
+- **Multiple new concepts** introduced
+- **Unfamiliar systems** or **critical business logic**
+- **High complexity** requiring careful testing
+
+**Proposal Pattern:**
+```
+"I can implement [feature]. This will involve [X systems/files/concepts].
+
+I recommend we build this incrementally to make debugging easier:
+
+**Phase 1: [Core functionality - MVP]** (~X min)
+- [Specific tasks]
+- **Test:** [How to verify]
+
+**Phase 2: [Add Feature Y]** (~X min)
+- [Specific tasks]
+- **Test:** [How to verify]
+
+**Phase 3: [Add Feature Z]** (~X min)
+- [Specific tasks]
+- **Test:** [How to verify]
+
+**Estimated total:** ~X hours
+
+Each phase is independently testable. Sound good, or prefer I implement everything at once?"
+```
+
+**After Each Phase:**
+```
+"✅ Phase 1 complete. Here's what I added:
+- [File 1]: [What changed]
+- [File 2]: [What changed]
+
+**To test:**
+```bash
+[Exact command]
+```
+
+**Expected result:** [What should happen]
+
+Please verify before I proceed to Phase 2."
+```
+
+**Wait for user confirmation before proceeding to next phase.**
+
+**Full implementation OK when:**
+- Single file change
+- <100 lines of code
+- Well-defined, isolated feature
+- Easy to test immediately
+- Low risk if something breaks
+
+**See:** [LEAN_DEVELOPMENT_WORKFLOW.md](LEAN_DEVELOPMENT_WORKFLOW.md) for complete methodology
+
+### 6. Intelligent Defaults
 
 **Apply automatically (technical standards):**
 - Security best practices
@@ -140,24 +201,46 @@ Claude: "I'll implement email notifications for card views.
         Proceeding with implementation..."
 ```
 
-### Pattern 2: Complex Feature Request
+### Pattern 2: Complex Feature Request (Incremental Approach)
 ```
 User: "Add team billing with Stripe subscriptions"
 
 Claude: "I'll implement team-based Stripe subscription billing.
-        This is a complex feature - generating comprehensive PRP...
-        
+        This is a complex feature affecting multiple systems.
+
         [Checks documentation, analyzes Stripe integration]
-        
-        For the billing model, I'd typically implement:
-        - Monthly/annual subscription tiers
-        - Per-seat pricing for team members
-        - Self-service subscription management
-        
-        Does this match your pricing strategy, or do you have
-        different requirements?
-        
-        [Awaits clarification, then proceeds with PRP and implementation]"
+
+        I recommend building this incrementally:
+
+        **Phase 1: Stripe SDK Integration** (~30 min)
+        - Install Stripe library
+        - Configure API keys
+        - Test: Can connect to Stripe API
+
+        **Phase 2: Subscription Creation** (~45 min)
+        - Create subscription endpoint
+        - Handle payment intents
+        - Test: Can create test subscription
+
+        **Phase 3: Team Member Management** (~40 min)
+        - Add seat-based billing logic
+        - Update subscription on team changes
+        - Test: Seats update correctly
+
+        **Phase 4: Subscription Management UI** (~60 min)
+        - Self-service upgrade/downgrade
+        - Payment method updates
+        - Test: Full subscription lifecycle works
+
+        **Estimated total:** ~3 hours
+
+        For the billing model:
+        - Monthly/annual tiers
+        - Per-seat pricing
+
+        Does this match your pricing strategy?
+
+        [Awaits confirmation, then proceeds with Phase 1]"
 ```
 
 ### Pattern 3: Vague Request
@@ -348,4 +431,12 @@ Claude: "I'll implement profile picture upload. Let me check our
 
 **These behavioral rules make Claude feel like a senior developer who knows your project intimately, not an assistant who needs constant guidance.**
 
-[Methodology](METHODOLOGY.md) | [Init Process](INIT_PROCESS.md) | [Agents](AGENT_PATTERNS.md)
+---
+
+## 🔗 Related Documentation
+
+- [METHODOLOGY.md](METHODOLOGY.md) - Context engineering principles
+- [LEAN_DEVELOPMENT_WORKFLOW.md](LEAN_DEVELOPMENT_WORKFLOW.md) - Incremental development methodology
+- [INIT_PROCESS.md](INIT_PROCESS.md) - Project initialization
+- [AGENT_PATTERNS.md](AGENT_PATTERNS.md) - Agent coordination
+- [CICD_DEPLOYMENT_GUIDE.md](CICD_DEPLOYMENT_GUIDE.md) - Deployment best practices

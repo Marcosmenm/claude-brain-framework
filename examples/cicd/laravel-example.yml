@@ -1,0 +1,151 @@
+# Laravel CI/CD Example Workflow
+# Framework: Laravel + React (or Vue)
+# Strategy: Feature Branch Workflow (release/* → staging, manual → production)
+
+name: Laravel CI/CD
+
+on:
+  push:
+    branches:
+      - 'release/**'
+      - 'hotfix/**'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  build_backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo, pdo_mysql
+
+      - name: Install Composer Dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Run Tests
+        run: php artisan test
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: backend
+          path: |
+            app/
+            bootstrap/
+            config/
+            database/
+            public/
+            resources/
+            routes/
+            storage/
+            vendor/
+            artisan
+            composer.json
+            composer.lock
+
+  build_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Frontend
+        run: npm run build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frontend
+          path: public/
+
+  deploy_staging:
+    if: startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/')
+    needs: [build_backend, build_frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+
+      - name: Deploy to Staging
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www/staging
+
+            # Backup database
+            mysqldump -u $DB_USER -p$DB_PASS $DB_NAME > backup_$(date +%Y%m%d_%H%M%S).sql
+
+            # Create release directory
+            RELEASE_DIR="releases/$(date +%Y%m%d%H%M%S)"
+            mkdir -p $RELEASE_DIR
+
+            # Copy files (artifact upload happens here in real deployment)
+            # rsync -avz --delete backend/ frontend/ $RELEASE_DIR/
+
+            # Run migrations
+            cd $RELEASE_DIR
+            php artisan migrate --force
+
+            # Switch symlink (zero-downtime)
+            ln -sfn $RELEASE_DIR /var/www/staging/current
+
+            # Restart services
+            sudo systemctl reload php8.2-fpm
+            sudo systemctl reload nginx
+
+  deploy_production:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production'
+    needs: [build_backend, build_frontend]
+    runs-on: ubuntu-latest
+    environment: production  # Requires manual approval
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+
+      - name: Deploy to Production
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PRODUCTION_HOST }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          username: ${{ secrets.PRODUCTION_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www/production
+            ./scripts/deploy.sh
+
+      - name: Health Check
+        run: |
+          curl -f https://your-domain.com/health || exit 1
+
+      - name: Notify Slack
+        if: always()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "${{ job.status == 'success' && '✅' || '❌' }} Production deployment ${{ job.status }}"
+            }
