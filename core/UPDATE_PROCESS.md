@@ -96,24 +96,86 @@ curl https://raw.githubusercontent.com/Marcosmenm/claude-brain-framework/main/CH
 
 ## 📋 Update Workflow
 
-### Step 1: Detection
+### Step 1: Detection (Automatic or On-Request)
+
+**Automatic (session start - from VERSION_DETECTION.md):**
+```
+User: [Opens project and starts working]
+
+Claude: [AUTOMATIC CHECK]
+"I notice this project is on framework v1.0.0, but v1.2.0 is available.
+
+You're missing 2 updates:
+
+**v1.1.0** (2025-10-13):
+- Multi-Repository System Template
+- Documentation Index Template
+- Incremental Documentation Strategy
+
+**v1.2.0** (2025-10-20):
+- Lean Development Workflow methodology
+- CI/CD Deployment Guide
+- Enhanced behavioral rules
+
+Would you like me to:
+1. Apply all updates (v1.0.0 → v1.2.0) - Recommended
+2. Apply only v1.1.0
+3. Apply only v1.2.0
+4. Skip for now
+
+Your choice?"
+```
+
+**On-request:**
 ```
 User: "Check for updates"
 
 Claude: "Checking claude-brain-framework...
-        
+
         Update Available: v1.5.0 (Minor)
         Current: v1.0.0
-        
+
         New Features:
         - Enhanced agent patterns
         - MCP auto-detection
         - Chat summary improvements
-        
+
         Safe to update automatically. Proceed?"
 ```
 
-### Step 2: Review
+### Step 2: Handle User Choice
+
+**If user chooses "Apply all" (recommended):**
+```
+Claude: "Applying v1.0.0 → v1.1.0 → v1.2.0...
+
+        Reading CHANGELOG for migration steps...
+        [Proceeds with full update]"
+```
+
+**If user chooses specific version (e.g., "Only v1.1.0"):**
+```
+Claude: "Applying only v1.1.0 updates...
+
+        Note: You'll remain on v1.1.0. I'll notify you about v1.2.0
+        in future sessions until applied.
+
+        [Proceeds with v1.1.0 update only]"
+```
+
+**If user chooses "Skip for now":**
+```
+Claude: "Understood. Proceeding with your work.
+
+        I'll remind you about available updates next session.
+        [Proceeds with user's original request]"
+```
+
+**Critical Rule:** Track which updates were offered and skipped to avoid repetitive notifications.
+
+---
+
+### Step 3: Review
 ```
 Claude: "Here's what will change in your project:
         
@@ -132,7 +194,7 @@ Claude: "Here's what will change in your project:
         Proceed with update?"
 ```
 
-### Step 3: Application
+### Step 4: Application
 ```
 Claude: "Updating your project...
         

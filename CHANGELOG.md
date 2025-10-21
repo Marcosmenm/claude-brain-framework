@@ -13,6 +13,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced MCP integration patterns
 - Community agent contributions
 
+## [1.2.1] - 2025-10-21
+
+### Added
+- **Proactive Update Detection**: New automatic framework update checking at session start
+  - Claude automatically detects when project framework version < latest framework version
+  - Proactively notifies user of ALL missing updates (not just latest)
+  - Lists each version update with key features from CHANGELOG
+  - Offers user choice: apply all, apply specific version(s), or skip
+  - No more missed framework improvements
+
+### Changed
+- **VERSION_DETECTION.md**: Added "Proactive Update Detection" section
+  - New Section 1: Automatic update check at session start (CRITICAL)
+  - New Section 2: Reactive update application (existing behavior)
+  - Added Example 1: Proactive detection with multi-version gap scenario
+  - Protocol now executes automatically without user request
+
+- **BEHAVIORAL_RULES.md**: Enhanced "Session Start" section
+  - Added Step 3: Automatic framework update check (PROACTIVE)
+  - Includes example of proactive notification before responding to user
+  - Links to VERSION_DETECTION.md for complete protocol
+
+- **UPDATE_PROCESS.md**: Added user choice handling mechanism
+  - New "Step 2: Handle User Choice" for multiple update scenarios
+  - Handles "Apply all", "Apply specific version", "Skip for now"
+  - Tracks offered updates to avoid repetitive notifications
+  - Step 1 now shows both automatic (session start) and on-request detection
+
+### Why This Matters
+- **No More Missed Updates**: Framework improvements automatically offered to users
+- **User Control**: Users choose which updates to apply, not forced
+- **Multi-Version Awareness**: Shows ALL missing versions (v1.0.0 → v1.1.0 → v1.2.0), not just latest
+- **Reduces Friction**: Users don't need to remember to check for updates
+- **Transparent**: Clear communication about what each version adds
+
+### Context
+This update directly addresses the issue where Claude would ignore framework updates unless explicitly asked to apply them. Now Claude proactively checks and offers updates at the start of every session, ensuring users benefit from framework improvements.
+
+**Example Scenario:**
+```
+Project on v1.0.0, framework at v1.2.0
+Old behavior: Claude ignores updates, user misses new features
+New behavior: Claude automatically notifies:
+  "Missing v1.1.0 (multi-repo templates) and v1.2.0 (lean workflow).
+   Apply all, specific, or skip?"
+```
+
 ## [1.2.0] - 2025-10-20
 
 ### Added

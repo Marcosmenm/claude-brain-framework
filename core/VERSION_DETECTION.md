@@ -4,7 +4,47 @@
 
 ## 🚨 The Rule
 
-**CLAUDE: Before doing ANYTHING framework-related:**
+**CLAUDE: You have TWO responsibilities:**
+
+### 1. PROACTIVE UPDATE DETECTION (Session Start)
+
+**When you start working on ANY project with framework:**
+
+```
+AUTOMATIC CHECK (first interaction of session):
+1. Detect CLAUDE.md exists → Framework is active
+2. Read version from footer (e.g., "Framework Version: 1.0.0")
+3. Read /path/to/claude-brain-framework/CHANGELOG.md
+4. Compare: Project version vs Latest framework version
+5. If gap exists → PROACTIVELY notify user with ALL missing updates
+
+TELL USER:
+"I notice this project is on framework v1.0.0, but the framework is now at v1.2.0.
+
+You're missing 2 updates:
+
+**v1.1.0** (2025-10-13):
+- Multi-Repository System Template
+- Documentation Index Template
+- Incremental Documentation Strategy
+[Full details in CHANGELOG]
+
+**v1.2.0** (2025-10-20):
+- Lean Development Workflow methodology
+- CI/CD Deployment Guide
+- Enhanced health checks
+[Full details in CHANGELOG]
+
+Would you like me to apply any of these updates?"
+```
+
+**CRITICAL:** Do this check **automatically** at session start. Don't wait to be asked.
+
+---
+
+### 2. REACTIVE UPDATE APPLICATION (User Requests)
+
+**When user explicitly asks to apply framework updates:**
 
 1. **Check if project already uses framework** (look for CLAUDE.md)
 2. **Identify current version** (check CLAUDE.md footer)
@@ -47,7 +87,46 @@ Check for CLAUDE.md
 
 ## ✅ Correct Behavior Examples
 
-### Example 1: New Project
+### Example 1: Proactive Update Detection (Session Start)
+
+```
+User: [Opens project and starts conversation] "Let's add a new feature..."
+
+Claude: [AUTOMATIC CHECK - first message of session]
+        - Reads CLAUDE.md footer: "Framework Version: 1.0.0"
+        - Reads /path/to/claude-brain-framework/CHANGELOG.md
+        - Latest version: 1.2.0
+        - Gap detected: 1.0.0 → 1.1.0 → 1.2.0
+
+Claude: "I notice this project is on framework v1.0.0, but the framework
+        is now at v1.2.0. You're missing 2 updates:
+
+        **v1.1.0** (2025-10-13):
+        - Multi-Repository System Template
+        - Documentation Index Template
+        - Incremental Documentation Strategy
+        - Enhanced MCP integration patterns
+
+        **v1.2.0** (2025-10-20):
+        - Lean Development Workflow methodology
+        - CI/CD Deployment Guide with 4-level health checks
+        - Enhanced behavioral rules for incremental development
+        - Framework-specific workflow examples
+
+        Would you like me to apply any of these updates? I can:
+        1. Apply all updates (recommended)
+        2. Apply only v1.1.0
+        3. Apply only v1.2.0
+        4. Skip for now and just work on your feature
+
+        [Then proceeds based on user choice]"
+```
+
+**CRITICAL:** This happens **automatically** without user asking for updates.
+
+---
+
+### Example 2: New Project
 ```
 User: "Apply claude-brain-framework"
 

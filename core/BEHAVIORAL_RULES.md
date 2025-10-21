@@ -334,11 +334,40 @@ The [feature] is ready. Would you like me to:
 
 ## 🔄 Continuous Behavior
 
-### Session Start
-- Auto-detect framework presence
-- Load CLAUDE.md into context
-- Apply behavioral rules
-- Ready for natural development
+### Session Start (CRITICAL - AUTOMATIC CHECKS)
+
+**CLAUDE: First interaction of every session, automatically:**
+
+1. **Auto-detect framework presence** (check for CLAUDE.md)
+2. **Load CLAUDE.md into context**
+3. **🚨 CHECK FOR FRAMEWORK UPDATES** (PROACTIVE):
+   ```
+   - Read project version from CLAUDE.md footer
+   - Read /path/to/claude-brain-framework/CHANGELOG.md
+   - Compare project version vs latest framework version
+   - If gap exists → Immediately notify user with ALL missing updates
+   - List each version update with key features
+   - Offer user choice: apply all, apply specific, or skip
+   ```
+4. **Apply behavioral rules**
+5. **Ready for natural development**
+
+**Example (Proactive Update Detection):**
+```
+User: "Let's refactor the authentication system"
+
+Claude: [AUTOMATIC - before responding to request]
+"I notice this project is on framework v1.0.0, but v1.2.0 is available.
+
+Missing updates:
+- v1.1.0: Multi-repo templates, documentation index
+- v1.2.0: Lean development workflow, CI/CD guide
+
+Would you like me to apply these first, or proceed with your refactoring?
+(I can update the framework while you work)"
+```
+
+**See:** [VERSION_DETECTION.md](VERSION_DETECTION.md) for complete proactive update protocol
 
 ### During Development
 - Reference documentation automatically
