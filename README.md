@@ -141,6 +141,7 @@ When the framework improves, Claude can update your projects while preserving cu
 - [VERSION_DETECTION.md](core/VERSION_DETECTION.md) - **MANDATORY:** Check existing setup before any action
 - [METHODOLOGY.md](core/METHODOLOGY.md) - Context engineering principles
 - [LEAN_DEVELOPMENT_WORKFLOW.md](core/LEAN_DEVELOPMENT_WORKFLOW.md) - **NEW v1.2.0:** Incremental development methodology
+- [TOKEN_OPTIMIZATION.md](core/TOKEN_OPTIMIZATION.md) - **NEW v1.3.0:** Reduce token usage by 28% average
 - [BEHAVIORAL_RULES.md](core/BEHAVIORAL_RULES.md) - How Claude should behave
 - [INIT_PROCESS.md](core/INIT_PROCESS.md) - Multi-cycle project initialization (new projects only)
 - [UPDATE_PROCESS.md](core/UPDATE_PROCESS.md) - Framework updates (existing projects)
@@ -150,6 +151,7 @@ When the framework improves, Claude can update your projects while preserving cu
 - [PROJECT_STRUCTURE_STANDARDS.md](core/PROJECT_STRUCTURE_STANDARDS.md) - Directory structure and migration
 
 ### Templates
+- [CLAUDE_MD_TOKEN_OPTIMIZED.md](templates/CLAUDE_MD_TOKEN_OPTIMIZED.md) - **NEW v1.3.0:** Token-optimized template (recommended)
 - [CLAUDE_MD_UNIVERSAL.md](templates/CLAUDE_MD_UNIVERSAL.md) - Universal single-project template
 - [CLAUDE_MD_MULTI_REPO_SYSTEM.md](templates/CLAUDE_MD_MULTI_REPO_SYSTEM.md) - Multi-repository systems (Backend + Web + Mobile)
 - [CLAUDE_MD_ROOT_ORCHESTRATION.md](templates/CLAUDE_MD_ROOT_ORCHESTRATION.md) - Multi-team root context (NEW v1.1.0)

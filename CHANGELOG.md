@@ -7,20 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-- **Deployment Safety Protocol Integration** into CICD_DEPLOYMENT_GUIDE.md
-  - New "Safety Verification Protocol" section with 5 critical questions to ask before deployment
-  - Questions cover data preservation, deployment approach, environment differences, backup/recovery, and deployment method
-  - Generic and framework-agnostic approach - applies to all deployment types (rsync, Docker, cloud platforms)
-  - Safety notes integrated into all deployment strategy examples (Blue-Green, Rolling, Docker)
-  - Common Deployment Mistakes table with prevention guidance
-  - Emphasizes asking questions BEFORE writing deployment code to prevent data loss
-
 ### Planned Features
 - Language-specific multi-repo templates (Java+React, Python+Vue, etc.)
 - Documentation dependency graphs
 - Enhanced MCP integration patterns
 - Community agent contributions
+
+## [1.3.0] - 2025-11-10
+
+### Added
+- **TOKEN_OPTIMIZATION.md** - New core methodology guide for reducing token usage
+  - Proven 28% average token reduction (15-36% depending on query complexity)
+  - Real-world test results from TagMyLink project (790→203 line CLAUDE.md)
+  - Simple implementation steps with before/after examples
+  - Clear guidelines on when to use optimization pattern
+  - Validation protocol for measuring effectiveness
+
+- **CLAUDE_MD_TOKEN_OPTIMIZED.md** - New recommended template (templates/)
+  - Minimal upfront context (~5-8k tokens vs ~40-50k traditional)
+  - On-demand documentation loading protocol
+  - Documentation index with file names + brief descriptions
+  - Methodology references (fetch only when needed)
+  - Architecture quick reference (names only, not full details)
+
+### Changed
+- **README.md** - Added token optimization to framework components
+  - Listed TOKEN_OPTIMIZATION.md in Core Methodology section
+  - Added CLAUDE_MD_TOKEN_OPTIMIZED.md as recommended template
+  - Marked as "NEW v1.3.0" for visibility
+
+### Philosophy
+- "Load minimal essentials upfront, fetch detailed docs on-demand"
+- Shifts from "load everything just in case" to "fetch what's needed when needed"
+- Treats token budget as a finite resource requiring optimization
 
 ## [1.2.1] - 2025-10-21
 
