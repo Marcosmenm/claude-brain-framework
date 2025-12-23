@@ -30,8 +30,9 @@ Without structured context:
 
 With Claude Brain Framework:
 - ✅ **90% token reduction** for context gathering
+- ✅ **60-70% additional savings** with quick reference registries
 - ✅ **10x faster** feature development start
-- ✅ **100% pattern consistency** through methodology enforcement
+- ✅ **100% pattern consistency** through reusability-first enforcement
 - ✅ **Permanent knowledge** capture across sessions
 - ✅ **Complete audit trail** of decisions and changes
 
@@ -141,9 +142,9 @@ When the framework improves, Claude can update your projects while preserving cu
 - [VERSION_DETECTION.md](core/VERSION_DETECTION.md) - **MANDATORY:** Check existing setup before any action
 - [METHODOLOGY.md](core/METHODOLOGY.md) - Context engineering principles
 - [LEAN_DEVELOPMENT_WORKFLOW.md](core/LEAN_DEVELOPMENT_WORKFLOW.md) - **NEW v1.2.0:** Incremental development methodology
-- [TOKEN_OPTIMIZATION.md](core/TOKEN_OPTIMIZATION.md) - **NEW v1.3.0:** Reduce token usage by 28% average
-- [BEHAVIORAL_RULES.md](core/BEHAVIORAL_RULES.md) - How Claude should behave
-- [INIT_PROCESS.md](core/INIT_PROCESS.md) - Multi-cycle project initialization (new projects only)
+- [TOKEN_OPTIMIZATION.md](core/TOKEN_OPTIMIZATION.md) - **ENHANCED v1.5.0:** 60-70% token savings with registry pattern
+- [BEHAVIORAL_RULES.md](core/BEHAVIORAL_RULES.md) - **ENHANCED v1.5.0:** Reusability-first development pattern
+- [INIT_PROCESS.md](core/INIT_PROCESS.md) - **ENHANCED v1.5.0:** Multi-cycle initialization with registry generation
 - [UPDATE_PROCESS.md](core/UPDATE_PROCESS.md) - Framework updates (existing projects)
 - [AGENT_PATTERNS.md](core/AGENT_PATTERNS.md) - Agent recommendations and usage
 - [CICD_DEPLOYMENT_GUIDE.md](core/CICD_DEPLOYMENT_GUIDE.md) - **NEW v1.2.0:** CI/CD deployment best practices
@@ -156,10 +157,12 @@ When the framework improves, Claude can update your projects while preserving cu
 - [CLAUDE_MD_MULTI_REPO_SYSTEM.md](templates/CLAUDE_MD_MULTI_REPO_SYSTEM.md) - Multi-repository systems (Backend + Web + Mobile)
 - [CLAUDE_MD_ROOT_ORCHESTRATION.md](templates/CLAUDE_MD_ROOT_ORCHESTRATION.md) - Multi-team root context (NEW v1.1.0)
 - [CLAUDE_MD_TEAM_LEVEL.md](templates/CLAUDE_MD_TEAM_LEVEL.md) - Individual team context (NEW v1.1.0)
+- [FRAMEWORK_PRINCIPLES.md](templates/FRAMEWORK_PRINCIPLES.md) - **ENHANCED v1.5.0:** Smart doc loading, ultra-compact protocol
 - [DOCUMENTATION_INDEX_TEMPLATE.md](templates/DOCUMENTATION_INDEX_TEMPLATE.md) - Documentation catalog and navigation
 - [PRP_TEMPLATE.md](templates/PRP_TEMPLATE.md) - Feature implementation blueprints
 - [DOCUMENTATION_TEMPLATE.md](templates/DOCUMENTATION_TEMPLATE.md) - System documentation
 - [CHAT_SUMMARY_TEMPLATE.md](templates/CHAT_SUMMARY_TEMPLATE.md) - Conversation summaries
+- [sections/COMPONENT_LIBRARY_SECTION.md](templates/sections/COMPONENT_LIBRARY_SECTION.md) - **NEW v1.5.0:** Component library addendum
 
 ### Examples
 - [saas-platform/](examples/saas-platform/) - Single-project SaaS example

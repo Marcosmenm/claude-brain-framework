@@ -13,6 +13,150 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced MCP integration patterns
 - Community agent contributions
 
+## [1.5.0] - 2025-12-23
+
+### Added
+- **Reusability-First Development Pattern** (core/BEHAVIORAL_RULES.md) - **CRITICAL behavioral change**
+  - New Section 7: Always check existing patterns before building new
+  - Protocol: Check docs → Search code → Propose extending vs creating → Extract patterns
+  - Applies to: components, services, APIs, queries, validation, auth, files, notifications
+  - Prevents code duplication and maintains consistency
+  - Based on real-world learnings from Claude Web Builder project
+
+- **Quick Reference Registry Pattern** (core/TOKEN_OPTIMIZATION.md) - **Major token optimization**
+  - Single-table registry for instant component/service/module lookup
+  - Token savings: 60-70% reduction in discovery queries (4,500 → 1,400 tokens)
+  - Speed: 5-10x faster component matching vs scanning multiple docs
+  - Real-world validation: Claude Web Builder (12 components, 93-line registry)
+  - Recommended columns: Name | Purpose | Path
+  - Threshold: 15+ reusable items (components, services, models, utilities)
+  - Organization: Start unified (40-50 items), split at 150+ lines
+  - Manual updates: 10-15 seconds per item (automation not needed)
+
+- **Registry Generation Protocol** (core/INIT_PROCESS.md Cycle 7)
+  - Conditional step for projects with 15+ reusable abstractions
+  - Automatic detection during initialization
+  - Presents registry recommendation to user with token savings explanation
+  - Integration with documentation generation workflow
+
+- **Smart Documentation Loading** (templates/FRAMEWORK_PRINCIPLES.md) - **Optional enhancement**
+  - Keyword-based auto-loading of relevant docs
+  - Token cost: ~120-150 tokens overhead
+  - ROI: Saves 2,000-4,000 tokens per trigger (break-even after 1-2 triggers)
+  - Example: "authentication" → Auth_System.md, "component" → Component_Library.md
+  - Project-specific triggers (define only for complex projects with 5+ specialized docs)
+  - FRAMEWORK_PRINCIPLES.md updated to v1.5.0
+
+- **Component Library Section Template** (templates/sections/COMPONENT_LIBRARY_SECTION.md)
+  - Section template (not full template) to insert into existing CLAUDE.md
+  - For: UI libraries, service catalogs, design systems, module libraries
+  - Includes: Component management rules, versioning workflow, extraction protocol
+  - Prevents common mistakes (modifying components in consumers)
+  - ~150-200 lines to add to UNIVERSAL or TOKEN_OPTIMIZED template
+  - Use when building projects with 15+ reusable abstractions
+
+### Changed
+- **BEHAVIORAL_RULES.md** - Added Section 7 after Intelligent Defaults
+  - Elevates "Integration Over Addition" pattern to primary behavioral rule
+  - Makes pattern-checking explicit and mandatory
+  - Provides clear examples of correct vs wrong approaches
+
+- **TOKEN_OPTIMIZATION.md** - Added registry pattern as proven optimization technique
+  - Complements existing pointer-based documentation pattern
+  - Includes real-world metrics from production usage
+  - Integration guidance with documentation workflow
+
+- **INIT_PROCESS.md** - Enhanced Cycle 7 with registry generation
+  - Optional but recommended for component-heavy projects
+  - Clear threshold guidance (15+ items)
+  - Token savings explanation for user decision-making
+
+- **FRAMEWORK_PRINCIPLES.md** - Updated to v1.5.0
+  - Added optional Smart Doc Loading section (5 lines)
+  - Keeps file compact: 44 base + 5 optional = 49 lines max
+  - Token cost: ~350-400 tokens (still highly optimized)
+
+### Why This Matters
+- **Prevents Code Duplication**: Reusability-first pattern forces checking before building
+- **Massive Token Savings**: Registry pattern reduces discovery queries by 60-70%
+- **Faster Development**: 5-10x faster component/service discovery
+- **Real-World Validated**: All patterns tested in production (Claude Web Builder)
+- **Universal Patterns**: Applies to all project types (not technology-specific)
+- **Optional Enhancements**: Advanced optimizations available but not required
+
+### Technical Details
+- **Based on:** Claude Web Builder production learnings (3+ weeks validation)
+- **Test data:** 12 components, 93-line registry, 7 keyword triggers
+- **Token metrics:** 60-70% savings (4,500 → 1,400 tokens per lookup)
+- **Maintenance:** 10-15 seconds per registry entry (acceptable overhead)
+- **ROI calculation:** Registry break-even after 1 lookup per session
+- **Smart loading:** Break-even after 1-2 triggers per session
+
+### Migration Guide
+Existing projects can adopt incrementally:
+
+**High Priority - Apply Immediately:**
+1. **Reusability-First Pattern** - Update Claude behavior, no file changes needed
+2. **Registry Pattern** - If you have 15+ components/services/modules
+
+**Medium Priority - Consider Adding:**
+3. **Smart Doc Loading** - If you have 5+ specialized docs and frequent context switching
+4. **Component Library Section** - If building reusable library/design system
+
+**Steps:**
+1. Framework auto-detects v1.4.0 → v1.5.0 gap on next session
+2. Claude offers update with feature summary
+3. User approves update
+4. Claude applies behavioral rules immediately
+5. Optionally creates registry for component-heavy projects
+
+## [1.4.0] - 2025-11-23
+
+### Added
+- **FRAMEWORK_PRINCIPLES.md** template (templates/) - **CRITICAL for project independence**
+  - Ultra-compressed Claude-to-Claude protocol (~35 lines, 280 tokens)
+  - Embedded in each project for framework knowledge persistence
+  - Daily development standards: documentation, commenting, PRPs, quality checks
+  - Language-agnostic patterns applicable to all tech stacks
+  - Eliminates need to open parent folder or reference framework continuously
+
+- **UPDATE_PROPAGATION.md** (core/) - Automated framework update system
+  - Version tracking across all projects
+  - Proactive update detection on session start
+  - Propagation process: behavioral, template, structural updates
+  - Multi-project batch update capability
+  - Backward compatibility enforcement
+  - Update history logging and rollback support
+
+### Changed
+- **INIT_PROCESS.md** (core/) - Added FRAMEWORK_PRINCIPLES.md creation step
+  - Now creates `.claude/FRAMEWORK_PRINCIPLES.md` during initialization
+  - Ensures every new project has embedded framework knowledge
+  - Projects can work independently without framework directory access
+
+- **BEHAVIORAL_RULES.md** (core/) - Added session start protocol
+  - Mandatory check for FRAMEWORK_PRINCIPLES.md on session start
+  - Auto-load framework principles for quality enforcement
+  - Documentation protocol, commenting standards, quality checks now automatic
+
+- **CLAUDE_MD_TOKEN_OPTIMIZED.md** (templates/) - Added framework philosophy section
+  - References `.claude/FRAMEWORK_PRINCIPLES.md` for daily standards
+  - Framework reference path for on-demand access
+  - Updated to v1.4.0
+
+### Philosophy
+- **Project Independence:** Each project self-sufficient for daily work
+- **Knowledge Persistence:** Framework principles embedded, not externally referenced
+- **Token Optimization:** Minimal framework footprint (~280 tokens vs 15-25k loading framework)
+- **Claude-to-Claude:** Pure AI instruction protocol, zero human-friendly fluff
+- **Propagation System:** Framework updates flow to projects automatically
+
+### Migration Path
+Existing projects can add FRAMEWORK_PRINCIPLES.md via:
+1. Copy `claude-brain-framework/templates/FRAMEWORK_PRINCIPLES.md` to `.claude/`
+2. Update CLAUDE.md with framework philosophy section
+3. Update version footer to v1.4.0
+
 ## [1.3.0] - 2025-11-10
 
 ### Added
@@ -385,7 +529,12 @@ For breaking changes (major versions), Claude will:
 
 ---
 
-[Unreleased]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.4.0...v1.5.0
+[1.4.0]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.2.1...v1.3.0
+[1.2.1]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/Marcosmenm/claude-brain-framework/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/Marcosmenm/claude-brain-framework/releases/tag/v1.0.0

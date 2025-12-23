@@ -59,6 +59,21 @@
 
 ---
 
+## 🧠 Framework Philosophy
+
+**CLAUDE: Read `.claude/FRAMEWORK_PRINCIPLES.md` on session start**
+
+Daily development standards (Claude-to-Claude protocol):
+- Documentation: Pointer-based, token-optimized
+- Code comments: Simple, semantic (no decoration)
+- Quality checks: Auto-execute before creating docs
+- PRPs: Auto-generate for >3 files or business logic
+- Integration: Enhance existing, never create parallel systems
+
+**Framework reference:** `/Users/marcosm/Documents/dev/claude-brain-framework/`
+
+---
+
 ## 🚀 Methodology References
 
 **CLAUDE: Fetch these only when working on complex features:**
@@ -104,6 +119,6 @@ This CLAUDE.md uses on-demand documentation loading:
 
 ---
 
-**Framework:** claude-brain-framework v1.3.0+
+**Framework:** claude-brain-framework v1.4.0
 **Template:** Token-Optimized
 **Last Updated:** YYYY-MM-DD
