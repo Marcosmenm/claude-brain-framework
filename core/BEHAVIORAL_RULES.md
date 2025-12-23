@@ -25,6 +25,23 @@ Claude MUST:
 
 ## 🎯 Core Behaviors
 
+### 0. Session Start Protocol (MANDATORY)
+
+**CLAUDE: On first interaction in any project session:**
+
+1. **Load CLAUDE.md** → Extract project context
+2. **Check for FRAMEWORK_PRINCIPLES.md** in `.claude/` directory
+3. **If exists:** Load framework principles (Claude-to-Claude protocol)
+4. **Apply protocols:** Documentation standards, quality checks, commenting patterns
+5. **Ready:** All behavioral rules now active
+
+**Framework principles provide:**
+- Documentation protocol (pointer-based, token-optimized)
+- Code commenting standards (all languages)
+- PRP generation triggers
+- Quality check automation
+- Integration patterns
+
 ### 1. Natural Development Workflow
 
 **When user says:** "I need to [implement feature]"
@@ -58,6 +75,53 @@ Based on our documented auth flow, I'll implement..."
 "Let me search through the controllers...
 [wastes tokens exploring code]"
 ```
+
+**Documentation as Pointers (Mandatory v1.4.0+):**
+
+Documentation should be a signpost system, not content duplication:
+
+```
+✅ CORRECT - Pointer-Based:
+# Auth System Documentation
+
+## Purpose
+Handles user authentication using Laravel Sanctum.
+
+## Files
+- app/Http/Controllers/AuthController.php - Login/logout
+- app/Models/User.php - User model with tokens
+
+## When Needed
+- Adding auth → Read AuthController.php
+- Modifying user model → Read User.php
+
+## Not Implemented
+- OAuth integration
+- Two-factor authentication
+
+✅ CORRECT USAGE:
+"I need to add OAuth. Let me read AuthController.php to understand current flow..."
+[reads actual code file]
+
+❌ WRONG - Code Duplication:
+# Auth System Documentation
+
+## AuthController Implementation
+The login method looks like this:
+\`\`\`php
+public function login(Request $request) {
+    // [300 lines of duplicated code]
+}
+\`\`\`
+
+❌ WRONG USAGE:
+"Based on the documentation's code example, I'll implement..."
+[never reads actual code, uses outdated docs]
+```
+
+**Key principle:** Documentation explains WHEN and WHERE to read files, not WHAT's in them.
+
+**See:** [TOKEN_OPTIMIZATION.md#pointer-based-documentation-pattern](TOKEN_OPTIMIZATION.md#pointer-based-documentation-pattern)
 
 ### 3. Analysis Before Questions
 
@@ -180,6 +244,56 @@ Does this align with your vision?"
 - Integration service selection
 - Design and branding decisions
 - Compliance requirements
+
+### 7. Reusability-First Development
+
+**CLAUDE: Always check for existing patterns before building new ones.**
+
+**Protocol - Execute in this order:**
+
+1. **Check documentation** for similar implementations
+2. **Search codebase** for reusable patterns
+3. **Propose extending existing** vs creating new
+4. **Extract new patterns** for future reuse
+
+**Correct Approach:**
+```
+"I've analyzed your new feature request. Checking existing patterns...
+
+Found in documentation:
+- ImageService handles S3 uploads with optimization
+- UserController has similar validation pattern
+- NotificationService uses event-driven approach
+
+I'll extend ImageService for this use case rather than build from scratch.
+This reuses proven patterns and maintains consistency."
+```
+
+**Wrong Approach:**
+```
+"I'll build this new feature..."
+[Starts coding without checking existing code]
+[Duplicates existing functionality]
+```
+
+**Apply to:**
+- ✅ UI Components - Check component library before creating new
+- ✅ Services/Utilities - Extend existing service classes
+- ✅ API Endpoints - Follow established API patterns
+- ✅ Database Queries - Reuse repository patterns
+- ✅ Validation Rules - Extend existing validators
+- ✅ Authentication/Authorization - Integrate with existing auth
+- ✅ File Handling - Use existing upload/storage services
+- ✅ Email/Notifications - Extend notification system
+
+**Benefits:**
+- Prevents code duplication
+- Maintains pattern consistency
+- Reduces maintenance burden
+- Leverages proven, tested code
+- Speeds up development
+
+**See:** [Integration Over Addition](#-integration-over-addition) for related guidance
 
 ## 💬 Conversation Patterns
 

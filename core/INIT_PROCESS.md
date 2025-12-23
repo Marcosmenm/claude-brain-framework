@@ -247,6 +247,55 @@ Should I proceed with generating these documentation files?"
 
 ## Cycle 7: Documentation Generation
 
+### Optional: Create Quick Reference Registry
+
+**For component-heavy or module-heavy projects (15+ reusable abstractions):**
+
+Before generating documentation, consider if a **Quick Reference Registry** would benefit the project:
+
+**When to create registry:**
+- 15+ reusable components (UI library, design system)
+- 15+ services (service catalog, microservices)
+- 15+ models/entities (complex data layer)
+- 15+ utilities/helpers (shared function library)
+- Mixed abstractions totaling 20+
+
+**Registry benefits:**
+- 60-70% token savings on component discovery
+- 5-10x faster "which component exists?" queries
+- Single table scan vs multiple file reads
+
+**Registry structure:**
+```markdown
+# [TYPE]_REGISTRY.md (COMPONENT_REGISTRY.md, SERVICE_REGISTRY.md, etc.)
+
+| Name | Purpose | Path |
+|------|---------|------|
+| [item-name] | Brief description (1 line) | path/to/item/ |
+```
+
+**Organization:**
+- Start with ONE unified registry (up to 40-50 items)
+- Use category headers for grouping
+- Split into separate registries at 150+ lines
+
+**Present to user:**
+```
+"I've identified [X] reusable components/services in your codebase.
+I recommend creating a Quick Reference Registry for faster discovery:
+
+COMPONENT_REGISTRY.md:
+- [X] UI components organized by category
+- Instant lookup table for component matching
+- Saves 60-70% tokens on 'which component?' queries
+
+Create registry alongside documentation?"
+```
+
+**See:** [TOKEN_OPTIMIZATION.md - Quick Reference Registry Pattern](TOKEN_OPTIMIZATION.md#quick-reference-registry-pattern) for details
+
+---
+
 ### Incremental Documentation Strategy
 
 **For Large Codebases (15+ domains, 50+ services, multi-repository systems):**
@@ -424,7 +473,15 @@ Please review the documentation and let me know if anything needs correction or 
 └── README.md (overview with file map)
 ```
 
-#### 4. PRP Structure
+#### 4. Framework Principles (REQUIRED)
+```
+/.claude/FRAMEWORK_PRINCIPLES.md (from framework template)
+```
+**Copy from:** `claude-brain-framework/templates/FRAMEWORK_PRINCIPLES.md`
+**Purpose:** Embedded framework knowledge for project independence
+**Content:** Claude-to-Claude protocol for daily development quality
+
+#### 5. PRP Structure
 ```
 /.claude/prps/
 ├── /active/ (empty, ready for use)
@@ -432,7 +489,7 @@ Please review the documentation and let me know if anything needs correction or 
 └── _TEMPLATE.md (customized for this stack)
 ```
 
-#### 5. Chat Summaries (if requested)
+#### 6. Chat Summaries (if requested)
 ```
 /.claude/chat-summaries/
 └── _TEMPLATE.md (summary template)
@@ -444,6 +501,9 @@ Please review the documentation and let me know if anything needs correction or 
 
 ✅ CLAUDE.md ([X] lines)
   - [Key sections with brief descriptions]
+
+✅ .claude/FRAMEWORK_PRINCIPLES.md
+  - Daily development quality protocol (Claude-to-Claude)
 
 ✅ .claude/documentation/
   - [Number] core system docs generated with actual content

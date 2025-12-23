@@ -153,6 +153,8 @@ Ask Claude: "How many tokens used in this conversation?"
 2. **Index over content** - List what exists, fetch when needed
 3. **Critical rules stay loaded** - Safety rules must always be active
 4. **Methodology on-demand** - Complex workflows loaded only for complex tasks
+5. **Documentation as pointers** - Explain WHEN and WHERE to read files, not WHAT's in them
+6. **Avoid code duplication** - Claude can read source code; documentation explains purpose and location
 
 ## Example: Before vs After
 
@@ -217,9 +219,245 @@ After implementing, verify with:
 - Test 2: <25k tokens (was 45-55k)
 - Test 3: <35k tokens (was 50-60k)
 
+## Pointer-Based Documentation Pattern
+
+**Documentation should be a signpost system, not a content duplication system.**
+
+### What Documentation SHOULD Do
+
+✅ **Explain what exists** - "The PWA system handles offline functionality"
+✅ **Point to locations** - "Implementation: `src/service-worker.js`, config: `pwa-config.json`"
+✅ **Describe scenarios** - "When user requests offline access → reference PWA docs"
+✅ **Document limitations** - "NOT IMPLEMENTED: Push notifications, background sync"
+✅ **Platform-specific gotchas** - "iOS requires user gesture for PWA install"
+✅ **List related systems** - "PWA interacts with: Cache API, Auth system, API layer"
+
+### What Documentation SHOULD NOT Do
+
+❌ **Duplicate code** - Don't copy implementation from source files
+❌ **Line-by-line explanations** - Claude reads the actual code
+❌ **Configuration references** - Don't list every config option (it's in the code)
+❌ **Step-by-step tutorials** - Claude figures out implementation from code
+❌ **Complete API references** - Redundant when source is readable
+❌ **Repeated structures** - Don't explain the same pattern in multiple docs
+
+### Example: Token-Optimized Documentation Structure
+
+```markdown
+# PWA System Documentation
+
+## Purpose
+Enables offline functionality and app-like experience for TagMyLink users.
+
+## Core Implementation Files
+- `src/service-worker.js` - Cache strategies and offline handling
+- `src/pwa-config.json` - PWA manifest and configuration
+- `src/hooks/usePWA.ts` - React hook for PWA status
+
+## When to Reference This System
+- User reports offline functionality issues
+- Implementing new cacheable features
+- Updating PWA manifest or icons
+- Modifying service worker behavior
+
+## Current Limitations (CRITICAL)
+- ❌ Push notifications NOT implemented
+- ❌ Background sync NOT implemented
+- ❌ Offline form submission queued but not tested
+- ⚠️ iOS PWA install requires manual user gesture
+
+## Platform-Specific Behavior
+- **iOS:** Must be added to home screen manually, limited cache
+- **Android:** Automatic install prompt, full cache support
+- **Desktop:** Chrome/Edge support, Safari limited
+
+## Related Systems
+- Cache API (managed by service worker)
+- Authentication (offline token refresh not supported)
+- API Layer (offline requests queued)
+
+## Common Tasks
+**Adding new cached route:**
+→ Modify `src/service-worker.js` cache patterns
+
+**Updating PWA manifest:**
+→ Edit `pwa-config.json`, update icons in `public/icons/`
+
+**Testing offline:**
+→ Chrome DevTools > Application > Service Workers > Offline
+```
+
+**Token Savings:** 60-85% vs traditional comprehensive docs
+
+### Traditional vs Pointer-Based
+
+**TRADITIONAL (450 lines, 3.2k tokens):**
+```markdown
+# PWA Documentation
+
+## Service Worker Implementation
+
+The service worker is implemented in src/service-worker.js.
+
+### Cache Strategy
+We use a cache-first strategy for static assets:
+
+\`\`\`javascript
+// Don't duplicate this - it's already in the file!
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
+\`\`\`
+
+### Configuration Options
+- cacheName: 'tagmylink-v1'
+- cacheUrls: ['/index.html', '/app.js', ...]
+- offlineUrl: '/offline.html'
+[... 400 more lines duplicating what's in code ...]
+```
+
+**POINTER-BASED (80 lines, 500 tokens):**
+```markdown
+# PWA Documentation
+
+## Purpose
+Offline functionality for TagMyLink users.
+
+## Files
+- `src/service-worker.js` - Cache strategies
+- `pwa-config.json` - Configuration
+
+## When Needed
+- Offline issues → Read service-worker.js
+- PWA config → Read pwa-config.json
+
+## Not Implemented
+- Push notifications
+- Background sync
+
+## Common Tasks
+Add cached route → Modify service-worker.js patterns
+Update manifest → Edit pwa-config.json
+```
+
+**Result:** 84% token reduction, same utility for Claude.
+
+---
+
+## Quick Reference Registry Pattern
+
+**For projects with 20+ reusable components/modules/services**
+
+### The Problem
+
+Finding specific components/services wastes tokens even with pointer-based docs:
+- Must read DOCUMENTATION_INDEX → system docs → scan directories → read multiple files
+- Token cost: 4,000-5,000 tokens per component search
+- Slow discovery process
+
+### The Solution
+
+**Single-table registry for instant lookup:**
+
+```markdown
+# COMPONENT_REGISTRY.md (or SERVICE_REGISTRY.md, MODEL_REGISTRY.md)
+
+| Name | Purpose | Path |
+|------|---------|------|
+| hero-split | Hero section with image and CTA | components/heroes/hero-split/ |
+| AuthService | User authentication and tokens | app/Services/AuthService.php |
+| UserModel | User account and relationships | app/Models/User.php |
+```
+
+**Claude scans table → finds match → reads specific file if needed**
+
+### Real-World Results
+
+**Test Project:** Claude Web Builder (12 components, 93-line registry)
+
+| Without Registry | With Registry | Savings |
+|------------------|---------------|---------|
+| ~4,500 tokens | ~1,400 tokens | **69%** ↓ |
+| Multiple file reads | Single table scan | **5-10x faster** |
+
+**ROI:** Registry costs ~1,400 tokens, saves 2,500-3,500 per lookup. Break-even after 1 query per session.
+
+### When to Use
+
+✅ **Use when:**
+- 15+ reusable components/modules/services
+- Frequent "which component does X?" questions
+- Component library, service catalog, or design system
+
+⚠️ **Skip when:**
+- <10 items (documentation index sufficient)
+- Unique one-off implementations
+
+### Registry Structure
+
+**Recommended columns:**
+- **Name** - Identifier (matches file/class name)
+- **Purpose** - What it does (1 line max)
+- **Path** - Location to read full details
+
+**Optional columns:** Type/Category, Status, Tags (add only if useful)
+
+**Organization:**
+- **Start unified** - One registry up to 40-50 items
+- **Split when large** - Separate registries at 150+ lines or fundamentally different types
+- **Use category headers** - Group items logically within unified registry
+
+**Example split:**
+```
+.claude/documentation/
+├── COMPONENT_REGISTRY.md    # UI components
+├── SERVICE_REGISTRY.md      # Backend services
+├── MODEL_REGISTRY.md        # Data models
+```
+
+### Maintenance
+
+**Manual updates work best:**
+- Add one line when creating new item (10-15 seconds)
+- Batch updates every 3-5 items
+- Automation not worth complexity
+
+**Template:**
+```markdown
+| new-item | Brief purpose description | path/to/item/ |
+```
+
+### Integration with Documentation
+
+**Registry = Quick lookup** (find which item exists, get path)
+**Full documentation = Deep context** (how it works, configuration, patterns)
+
+**Workflow:**
+1. User asks about component → Claude reads registry → finds match
+2. If details needed → Claude reads full documentation at path
+3. Implement using discovered pattern
+
+### Token Savings Summary
+
+- **Discovery:** 60-70% token reduction
+- **Speed:** 5-10x faster component matching
+- **Typical savings:** 2,500-3,500 tokens per lookup
+- **Best for:** Projects with 15+ reusable abstractions
+
+**See:** [INIT_PROCESS.md Cycle 7](INIT_PROCESS.md) for registry generation during initialization
+
+---
+
 ## Framework Integration
 
-This optimization is now **recommended** for all new projects using claude-brain-framework v1.3.0+
+This optimization is now **mandatory** for all new projects using claude-brain-framework v1.4.0+
+
+**Documentation Philosophy:**
+> "Documentation should serve as a pointer and context guide, not a complete reference manual. Claude can read source code - documentation should explain WHEN and WHY to read specific files, not duplicate their contents."
 
 Existing projects can migrate gradually:
 1. High-documentation projects first (biggest wins)
@@ -228,7 +466,7 @@ Existing projects can migrate gradually:
 
 ---
 
-**Version:** 1.0.0
-**Tested on:** TagMyLink (Laravel + React)
-**Framework:** claude-brain-framework v1.3.0
-**Date:** 2025-11-10
+**Version:** 1.1.0 (Added Pointer-Based Pattern)
+**Tested on:** TagMyLink (Laravel + React), Claude Skills Integration
+**Framework:** claude-brain-framework v1.4.0
+**Date:** 2025-11-11

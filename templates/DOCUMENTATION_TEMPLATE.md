@@ -1,201 +1,116 @@
 # [System Name] Documentation
 
-**[Brief one-line description of what this system does]**
-
-## 📋 Quick Context
-
-**Purpose:** [Core function in 1-2 sentences]
-
-**Key Files:**
-- `[path/to/main/file]` - [What it does]
-- `[path/to/key/file]` - [What it does]
-- `[path/to/config]` - [What it does]
-
-**Common Issues:**
-- [Issue 1] → [Solution]
-- [Issue 2] → [Solution]
+**[One-line description of purpose]**
 
 ---
 
-## 🎯 How It Works
+## Purpose
 
-### User Perspective
-**What users do:**
-1. [Step 1 - user action]
-2. [Step 2 - system response]
-3. [Step 3 - result]
-
-**What users see:**
-- [Observable behavior 1]
-- [Observable behavior 2]
-
-### System Perspective
-**Internal workflow:**
-1. [System process 1]
-2. [System process 2]
-3. [System process 3]
-
-**Data flow:**
-```
-[Input] → [Process 1] → [Process 2] → [Output]
-```
+[2-3 sentences explaining what this system does and why it exists]
 
 ---
 
-## 🏗️ Technical Architecture
+## Core Implementation Files
 
-### Core Components
+- **`[path/to/main/file]`** - [Purpose only, not implementation]
+- **`[path/to/key/file]`** - [Purpose only]
+- **`[path/to/config]`** - [Configuration location]
 
-#### [Component 1 Name]
-- **Location:** `[file path]`
-- **Responsibility:** [What it does]
-- **Dependencies:** [What it needs]
-- **Key Methods/Functions:**
-  - `[method]` - [Purpose]
-  - `[method]` - [Purpose]
-
-#### [Component 2 Name]
-- **Location:** `[file path]`
-- **Responsibility:** [What it does]
-- **Dependencies:** [What it needs]
-- **Key Methods/Functions:**
-  - `[method]` - [Purpose]
-  - `[method]` - [Purpose]
-
-### Database Schema
-
-**Tables:**
-- `[table_name]`
-  - Key fields: [list important fields]
-  - Relationships: [foreign keys, relations]
-  - Indexes: [performance indexes]
-
-### API Endpoints (if applicable)
-
-**[HTTP Method] /api/[endpoint]**
-- **Purpose:** [What it does]
-- **Auth:** [Required permissions]
-- **Request:** [Parameters]
-- **Response:** [Return format]
-- **Errors:** [Error codes]
+**Claude: Read these files when working on this system. Don't duplicate their contents here.**
 
 ---
 
-## 💻 Development Context
+## When to Reference This System
 
-### Implementation Patterns
-```[language]
-// Pattern 1: [Pattern name]
-[code example]
+**Load this documentation when:**
+- User requests [specific feature type]
+- Working on [related functionality]
+- Debugging [specific issue type]
+- Modifying [specific component]
 
-// Pattern 2: [Pattern name]
-[code example]
-```
-
-### Testing Strategy
-**Unit Tests:**
-- Location: `[test file path]`
-- Coverage: [What's tested]
-- Run: `[test command]`
-
-**Integration Tests:**
-- Location: `[test file path]`
-- Scenarios: [What's tested]
-- Run: `[test command]`
-
-### Common Development Tasks
-
-**Add new [feature type]:**
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-
-**Modify existing [feature type]:**
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
+**Then read the relevant files above.**
 
 ---
 
-## 🔧 Configuration
+## Current Limitations (CRITICAL)
 
-### Environment Variables
-- `[VAR_NAME]` - [Purpose, default value]
-- `[VAR_NAME]` - [Purpose, default value]
+**What's NOT implemented:**
+- ❌ [Feature 1] - Not built yet
+- ❌ [Feature 2] - Planned but not implemented
+- ⚠️ [Feature 3] - Partially implemented, [specific limitation]
 
-### Configuration Files
-- `[config/file]` - [What it configures]
-
----
-
-## 🚨 Troubleshooting
-
-### Common Issues
-
-**Issue:** [Problem description]
-- **Symptom:** [How it manifests]
-- **Cause:** [Why it happens]
-- **Solution:** [How to fix]
-
-**Issue:** [Problem description]
-- **Symptom:** [How it manifests]
-- **Cause:** [Why it happens]
-- **Solution:** [How to fix]
-
-### Debugging Tips
-- [Tip 1]
-- [Tip 2]
-- [Logging locations and what to look for]
+**Why document limitations:** Prevents Claude from assuming features exist.
 
 ---
 
-## 📊 Performance Considerations
+## Platform/Environment-Specific Behavior
 
-### Optimization Patterns
-- [Optimization 1]: [When and why]
-- [Optimization 2]: [When and why]
-
-### Monitoring
-- **Metrics:** [What to monitor]
-- **Alerts:** [Alert conditions]
+**If applicable:**
+- **[Platform A]:** [Specific behavior or gotchas]
+- **[Platform B]:** [Different behavior]
+- **[Environment]:** [Special considerations]
 
 ---
 
-## 🔒 Security
+## Related Systems
 
-### Authentication/Authorization
-- [How auth is handled]
-- [Permission model]
-
-### Data Protection
-- [Sensitive data handling]
-- [Encryption approach]
-
-### Security Checklist
-- [ ] [Security check 1]
-- [ ] [Security check 2]
+**This system interacts with:**
+- **[System A]:** [Nature of interaction] - See [System_A_Documentation.md]
+- **[System B]:** [Nature of interaction] - See [System_B_Documentation.md]
 
 ---
 
-## 🔗 Related Systems
+## Common Tasks
 
-- **[System Name]:** [How they interact]
-- **[System Name]:** [How they interact]
+**Adding [new feature type]:**
+→ Modify `[specific file]` (read file for implementation patterns)
 
----
+**Modifying [existing feature]:**
+→ Check `[specific file]`, update `[related file]`
 
-## 📝 Change History
+**Debugging [common issue]:**
+→ Check logs in `[location]`, verify `[specific file]` configuration
 
-### Recent Changes
-- **[Date]:** [Change description]
-- **[Date]:** [Change description]
-
-### Planned Improvements
-- [Future enhancement 1]
-- [Future enhancement 2]
+**Claude: These are pointers. Read the actual files to understand HOW to implement.**
 
 ---
 
+## Configuration
+
+**Location:** `[config file path]`
+**Environment variables:** `[.env variables if any]`
+
+**Claude: Read the config file when configuration changes are needed.**
+
+---
+
+## Quick Troubleshooting
+
+**Issue:** [Common problem]
+→ **Check:** [Specific file or log]
+→ **Solution:** [Pointer to where fix should be made]
+
+**Issue:** [Another common problem]
+→ **Check:** [Specific location]
+→ **Solution:** [Where to make changes]
+
+---
+
+## ⚠️ What This Documentation Does NOT Include
+
+This documentation intentionally does NOT include:
+- ❌ Code examples (read actual files instead)
+- ❌ Step-by-step implementation tutorials
+- ❌ Complete API references (in the code)
+- ❌ Configuration option lists (in config files)
+- ❌ Database schema details (read migrations)
+
+**Why:** Claude can read source code. Documentation should explain WHEN and WHERE to read, not duplicate WHAT's there.
+
+**See:** [../core/TOKEN_OPTIMIZATION.md#pointer-based-documentation-pattern](../core/TOKEN_OPTIMIZATION.md#pointer-based-documentation-pattern)
+
+---
+
+**Version:** 2.0.0 (Token-Optimized)
 **Last Updated:** [Date]
-**Maintained by:** [Team/Person]
-**Questions?** [Contact or discussion link]
+**Purpose:** Signpost system, not content duplication
